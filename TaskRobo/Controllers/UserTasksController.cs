@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using TaskRobo.DataAccess;
 using TaskRobo.DataAccess.Repository;
@@ -13,8 +7,7 @@ namespace TaskRobo.Controllers
 {
     public class UserTasksController : Controller
     {
-        private TaskRoboDbContext db = new TaskRoboDbContext();
-        private ITaskRepository taskRepository = new TaskRepository();
+        private readonly ITaskRepository taskRepository = new TaskRepository();
 
         // GET: UserTasks
         public ActionResult Index()
@@ -25,16 +18,10 @@ namespace TaskRobo.Controllers
         // GET: UserTasks/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            UserTask userTask = taskRepository.GetTask(id.Value);
-            if (userTask == null)
-            {
-                return HttpNotFound();
-            }
+            var userTask = taskRepository.GetTask(id.Value);
+            if (userTask == null) return HttpNotFound();
             return View(userTask);
         }
 
@@ -49,7 +36,8 @@ namespace TaskRobo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TaskId,TaskTitle,TaskContent,TaskStatus")] UserTask userTask)
+        public ActionResult Create([Bind(Include = "TaskId,TaskTitle,TaskContent,TaskStatus")]
+            UserTask userTask)
         {
             if (ModelState.IsValid)
             {
@@ -63,16 +51,10 @@ namespace TaskRobo.Controllers
         // GET: UserTasks/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            UserTask userTask = taskRepository.GetTask(id.Value);
-            if (userTask == null)
-            {
-                return HttpNotFound();
-            }
+            var userTask = taskRepository.GetTask(id.Value);
+            if (userTask == null) return HttpNotFound();
             return View(userTask);
         }
 
@@ -81,48 +63,36 @@ namespace TaskRobo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TaskId,TaskTitle,TaskContent,TaskStatus")] UserTask userTask)
+        public ActionResult Edit([Bind(Include = "TaskId,TaskTitle,TaskContent,TaskStatus")]
+            UserTask userTask)
         {
             if (ModelState.IsValid)
             {
-               taskRepository.UpdateTask(userTask);
+                taskRepository.UpdateTask(userTask);
                 return RedirectToAction("Index");
             }
+
             return View(userTask);
         }
 
         // GET: UserTasks/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            UserTask userTask = taskRepository.GetTask(id.Value);
-            if (userTask == null)
-            {
-                return HttpNotFound();
-            }
+            var userTask = taskRepository.GetTask(id.Value);
+            if (userTask == null) return HttpNotFound();
             return View(userTask);
         }
 
         // POST: UserTasks/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-           taskRepository.DeleteTask(id);
+            taskRepository.DeleteTask(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

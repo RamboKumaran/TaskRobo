@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaskRobo.DataAccess.Repository
 {
-    public class TaskRepository : ITaskRepository
+    public class TaskRepository : ITaskRepository, IDisposable
     {
         private TaskRoboDbContext db = new TaskRoboDbContext();
         public IEnumerable<UserTask> GetTasks()
@@ -39,6 +39,11 @@ namespace TaskRobo.DataAccess.Repository
             UserTask userTask = db.UserTask.Find(id);
             db.UserTask.Remove(userTask);
             db.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
     }
 }
