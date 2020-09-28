@@ -1,42 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TaskRobo.DataAccess.Repository
 {
     public class TaskRepository : ITaskRepository
     {
-        private readonly TaskRoboDbContext _taskRoboDbContext;
-
-        public TaskRepository()
+        private TaskRoboDbContext db = new TaskRoboDbContext();
+        public IEnumerable<UserTask> GetTasks()
         {
-            _taskRoboDbContext = new TaskRoboDbContext();
+          var tasks =   db.UserTask.ToList();
+
+          return tasks;
         }
 
-        public async Task<IEnumerable<UserTask>> GetTasksAsync()
+        public UserTask GetTask(int id)
         {
-            return await _taskRoboDbContext.UserTask.ToListAsync();
+           return db.UserTask.Find(id);
         }
 
-        public Task<UserTask> GetTaskAsync(int id)
+        public void AddTask(UserTask userTask)
         {
-            throw new NotImplementedException();
+            db.UserTask.Add(userTask);
+            db.SaveChanges();
         }
 
-        public Task<UserTask> AddTask(UserTask userTask)
+        public void UpdateTask(UserTask userTask)
         {
-            throw new NotImplementedException();
+            db.Entry(userTask).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
-        public Task<UserTask> UpdateTask(UserTask userTask)
+        public void DeleteTask(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteTask(int id)
-        {
-            throw new NotImplementedException();
+            UserTask userTask = db.UserTask.Find(id);
+            db.UserTask.Remove(userTask);
+            db.SaveChanges();
         }
     }
 }

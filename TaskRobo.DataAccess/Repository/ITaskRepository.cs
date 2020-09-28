@@ -5,14 +5,14 @@ namespace TaskRobo.DataAccess.Repository
 {
     public interface ITaskRepository
     {
-        Task<IEnumerable<UserTask>> GetTasksAsync();
+        IEnumerable<UserTask> GetTasks();
 
-        Task<UserTask> GetTaskAsync(int id);
+        UserTask GetTask(int id);
 
-        Task<UserTask> AddTask(UserTask userTask);
+        void AddTask(UserTask userTask);
 
-        Task<UserTask> UpdateTask(UserTask userTask);
+        void UpdateTask(UserTask userTask);
 
-        Task<bool> DeleteTask(int id);
+        void DeleteTask(int id);
     }
 }

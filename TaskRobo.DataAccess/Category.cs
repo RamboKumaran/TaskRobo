@@ -10,6 +10,6 @@ namespace TaskRobo.DataAccess
 
         public string CategoryTitle { get; set; }
 
-        public IEnumerable<AppUser> Users { get; set; }
+        public int UserId { get; set; }
     }
 }

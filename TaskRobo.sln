@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskRobo", "TaskRobo\TaskRo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskRobo.DataAccess", "TaskRobo.DataAccess\TaskRobo.DataAccess.csproj", "{8DD10936-4457-4635-A191-F5B6C0DFD6F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskRobo.Business", "TaskRobo.Business\TaskRobo.Business.csproj", "{3740C425-A419-4D90-AF5D-5143F4DC8E3E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{8DD10936-4457-4635-A191-F5B6C0DFD6F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DD10936-4457-4635-A191-F5B6C0DFD6F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DD10936-4457-4635-A191-F5B6C0DFD6F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3740C425-A419-4D90-AF5D-5143F4DC8E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3740C425-A419-4D90-AF5D-5143F4DC8E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3740C425-A419-4D90-AF5D-5143F4DC8E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3740C425-A419-4D90-AF5D-5143F4DC8E3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

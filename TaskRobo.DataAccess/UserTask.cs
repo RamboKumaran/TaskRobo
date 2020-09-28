@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TaskRobo.DataAccess
 {
@@ -13,8 +14,10 @@ namespace TaskRobo.DataAccess
 
         public string TaskStatus { get; set; }
 
+        //[ForeignKey("User_Id")]
         public AppUser User { get; set; }
 
+        //[ForeignKey("Category_CategoryId")]
         public Category Category { get; set; }
     }
 }

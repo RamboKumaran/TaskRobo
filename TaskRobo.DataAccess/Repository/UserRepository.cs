@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
@@ -16,6 +17,12 @@ namespace TaskRobo.DataAccess.Repository
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
         {
             return await _taskRoboDbContext.AppUser.ToListAsync();
+        }
+
+        public async Task<bool> AuthenticatedAsync(string email, string password)
+        {
+            return await _taskRoboDbContext.AppUser.AnyAsync(x =>
+                string.Equals(x.Email, email, StringComparison.InvariantCultureIgnoreCase) && x.Password == password);
         }
     }
 }
